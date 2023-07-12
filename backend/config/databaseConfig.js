@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
+const MONGODB_URL = process.env.MONGODB_URL 
 
-const MONGO_URL = process.env.MONGO_URL || "mongodb+srv://abhinav:Abhi123@cluster0.4t5bjxi.mongodb.net/";
-
-const databaseconnect = () => {
-    mongoose
-        .connect(MONGO_URL)
+const connectDatabase = () => {
+    try {
+        mongoose
+        .connect(MONGODB_URL)
         .then((conn) => console.log(`Connected to DB: ${conn.connection.host}`));
-        // .catch((err) => console.log(err.message));
+    } catch (error) {
+        console.log(err.message);
+    }
 }
 
-module.exports = databaseconnect;
+module.exports = connectDatabase;
